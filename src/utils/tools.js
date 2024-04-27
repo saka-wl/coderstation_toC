@@ -88,9 +88,9 @@ export function formatDate(timestamp, part) {
  * 批量生成下拉列表的 option
  */
 
-export function typeOptionCreator(Select, typeList){
+export function typeOptionCreator(Select, typeList) {
   let optionContainer = [];
-  for(let i=0;i<typeList.length;i++){
+  for (let i = 0; i < typeList.length; i++) {
     optionContainer.push(
       <Select.Option
         value={typeList[i]._id}

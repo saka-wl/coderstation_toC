@@ -45,19 +45,21 @@ function Issue(props) {
         typeTarget = issueTypeId
       }
       const { data } = await getIssueByPage(searchParams)
-      setIssueInfo(data.data)
+      setIssueInfo(data?.data)
       setPageInfo({
-        current: data.currentPage,
-        pageSize: data.eachPage,
-        total: data.count
+        current: data?.currentPage,
+        pageSize: data?.eachPage,
+        total: data?.count
       })
     }
     fetchData()
   }, [issueTypeId, pageInfo.current, pageInfo.pageSize])
 
   let issueList = []
-  for (let i = 0; i < issueInfo.length; i++) {
-    issueList.push(<IssueItems key={i} issueInfo={issueInfo[i]} />)
+  if(issueInfo?.length > 0) {
+    for (let i = 0; i < issueInfo.length; i++) {
+      issueList.push(<IssueItems key={i} issueInfo={issueInfo[i]} />)
+    }
   }
 
   return (

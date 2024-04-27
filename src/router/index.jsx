@@ -7,6 +7,11 @@ import IssueDetail from "../Pages/IssueDetail";
 import SearchPage from "../components/SearchPage";
 import BookDetail from "../Pages/BookDetail";
 import Personal from "../Pages/Personal";
+import FileLoad from "../Pages/FileLoad"
+import FileUpLoad from "../components/FileUpLoad";
+import FileSearch from "../components/FileSearch";
+import MyFileList from "../components/MyFileList";
+import MyFileDeleted from "../components/MyFileDeleted"
 
 export default function RouteConfig() {
   return (
@@ -20,6 +25,13 @@ export default function RouteConfig() {
       <Route path="/" element={<Navigate replace to="/issue" />}></Route>
       <Route path="/searchpage" element={<SearchPage />}></Route>
       <Route path="/personal" element={<Personal />}></Route>
+      <Route path="/fileload" element={<FileLoad />}>
+        <Route path="/fileload/" element={<Navigate replace to="/fileload/search" />}></Route>
+        <Route path="/fileload/upload" element={<FileUpLoad />}></Route>
+        <Route path="/fileload/search" element={<FileSearch />}></Route>
+        <Route path="/fileload/mylist" element={<MyFileList />}></Route>
+        <Route path="/fileload/deletedFile" element={<MyFileDeleted />}></Route>
+      </Route>
     </Routes>
   )
 }

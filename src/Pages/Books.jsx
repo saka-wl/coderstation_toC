@@ -45,38 +45,41 @@ function Books(props) {
   }, [bookTypeId, pageInfo.current, pageInfo.pageSize])
 
   let booksList = []
-  for (let i = 0; i < booksInfo.length; i++) {
-    booksList.push(
-      <Card
-        bordered={true}
-        loading={isLoading}
-        style={{ width: 200, marginBottom: 30 }}
-        key={i*Math.random()}
-        hoverable
-        onClick={() => {
-          navigate('/books/' + booksInfo[i]._id)
-        }}
-        cover={
-          <img
-            alt={booksInfo[i].bookTitle}
-            style={{
-              width: 160,
-              height: 200,
-              margin: 'auto',
-              marginTop: 10
-            }}
-            src={booksInfo[i].bookPic}
-          />
-        }
-      >
-        <Meta title={booksInfo[i].bookTitle} />
-        <div className={styles.numberContainer}>
-          <div>浏览数：{booksInfo[i]?.scanNumber}</div>
-          <div>评论数：{booksInfo[i]?.commentNumber}</div>
-        </div>
-      </Card>
-    )
+  if(booksInfo.length > 0) {
+    for (let i = 0; i < booksInfo.length; i++) {
+      booksList.push(
+        <Card
+          bordered={true}
+          loading={isLoading}
+          style={{ width: 200, marginBottom: 30 }}
+          key={i*Math.random()}
+          hoverable
+          onClick={() => {
+            navigate('/books/' + booksInfo[i]._id)
+          }}
+          cover={
+            <img
+              alt={booksInfo[i].bookTitle}
+              style={{
+                width: 160,
+                height: 200,
+                margin: 'auto',
+                marginTop: 10
+              }}
+              src={booksInfo[i].bookPic}
+            />
+          }
+        >
+          <Meta title={booksInfo[i].bookTitle} />
+          <div className={styles.numberContainer}>
+            <div>浏览数：{booksInfo[i]?.scanNumber}</div>
+            <div>评论数：{booksInfo[i]?.commentNumber}</div>
+          </div>
+        </Card>
+      )
+    }
   }
+
   if (booksInfo.length % 5 !== 0) {
     var blank = 5 - (booksInfo.length % 5)
     for (let i = 1; i <= blank; i++) {

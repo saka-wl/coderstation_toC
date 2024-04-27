@@ -3,7 +3,7 @@ import React from 'react';
 function PageFooter(props) {
   return (
     <div>
-    <p className="links">
+    {/* <p className="links">
         <span className="linkItem">友情链接：</span>
         <a
             href="https://duyi.ke.qq.com/"
@@ -37,7 +37,7 @@ function PageFooter(props) {
         >
             骆昊的技术专栏
         </a>
-    </p>
+    </p> */}
     <p>© 2022 - Coder Station</p>
     <p>Powered by Create React App</p>
 </div>

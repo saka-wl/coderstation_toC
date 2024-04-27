@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       const result = await getInfo()
-      if (result.data === null) {
+      if (result?.data === null) {
         message.warning(result.msg)
       } else {
         const {data} = await getUserById(result.data._id)
@@ -32,7 +32,7 @@ function App() {
       }
     }
     if(localStorage.getItem("userToken")) fetchData();
-    if(typeList.length === 0) dispatch(getTypeListAsync());
+    if(typeList?.length === 0) dispatch(getTypeListAsync());
   }, [])
 
   function loginHandle() {

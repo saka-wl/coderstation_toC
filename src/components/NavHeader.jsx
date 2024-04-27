@@ -44,9 +44,9 @@ function NavHeader(props) {
         <NavLink className="navigation" to="/interviews">
           面试题
         </NavLink>
-        <a className="navigation" href="https://search.bilibili.com/all?vt=53938560&keyword=%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98&from_source=webtop_search&spm_id_from=333.1007&search_source=5" target="_blank">
-          视频教程
-        </a>
+        <NavLink className="navigation" to="/fileload">
+          文件分享
+        </NavLink>
       </nav>
       {/* 搜索框 */}
       <div className="searchContainer">

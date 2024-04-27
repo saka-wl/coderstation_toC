@@ -1,0 +1,34 @@
+
+.password {
+    width: 200px;
+    display: flex;
+}
+
+.password_span {
+    width: 50%;
+}
+
+.password_btn {
+    width: 50%;
+    display: flex;
+}
+
+.fileId {
+    display: flex;
+}
+
+.fileId-text {
+    width: 60%;
+}
+
+.fileId-btn {
+    width: 40%;
+}
+
+.copyBtn {
+    margin-left: 5px;
+}
+
+.copyBtn:hover {
+    color: #1890ff !important;
+}

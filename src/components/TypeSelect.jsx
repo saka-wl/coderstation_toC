@@ -25,10 +25,10 @@ function TypeSelect(props) {
   }
 
   useEffect(() => {
-    if (!typeList.length) {
+    if (!typeList?.length) {
       dispatch(getTypeListAsync())
     }
-    if (typeList.length) {
+    if (typeList?.length) {
       const arr = []
       arr.push(
         <Tag color="magenta" value="all" key="all" style={{ cursor: 'pointer' }} onClick={() => handleTagClick('all')}>

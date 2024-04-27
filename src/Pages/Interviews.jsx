@@ -23,10 +23,10 @@ function Interviews(props) {
     if (interviewTitleList.length === 0) {
       dispatch(getInterviewTitleAsync())
     }
-    if (typeList.length === 0) {
+    if (typeList?.length === 0) {
       dispatch(getTypeListAsync())
     }
-    if (typeList.length && interviewTitleList.length) {
+    if (typeList?.length && interviewTitleList.length) {
       let arr = []
       // 添加分类标题
       for (let i = 0; i < typeList.length; i++) {
@@ -36,20 +36,23 @@ function Interviews(props) {
         })
       }
       // 每一个标题下面的面试题
-      for (let i = 0; i < interviewTitleList.length; i++) {
-        const childArr = []
-        for (let j = 0; j < interviewTitleList[i].length; j++) {
-          childArr.push({
-            title: (
-              <h4 style={{ fontWeight: 200 }} onClick={() => handleTitleClick(interviewTitleList[i][j]._id)}>
-                {interviewTitleList[i][j].interviewTitle}
-              </h4>
-            ),
-            key: `${i} - ${j}`
-          })
+      if(interviewTitleList.length > 0) {
+        for (let i = 0; i < interviewTitleList.length; i++) {
+          const childArr = []
+          for (let j = 0; j < interviewTitleList[i].length; j++) {
+            childArr.push({
+              title: (
+                <h4 style={{ fontWeight: 200 }} onClick={() => handleTitleClick(interviewTitleList[i][j]._id)}>
+                  {interviewTitleList[i][j].interviewTitle}
+                </h4>
+              ),
+              key: `${i} - ${j}`
+            })
+          }
+          arr[i].children = childArr
         }
-        arr[i].children = childArr
       }
+
       setTreeData(arr)
     }
   }, [typeList, interviewTitleList])

@@ -57,9 +57,11 @@ function Discuss(props) {
         })
         data = res.data
       }
-      for (let i = 0; i < data.data.length; i++) {
-        const resp = await getUserById(data.data[i].userId)
-        data.data[i].userInfo = resp.data
+      if(data.data.length > 0) {
+        for (let i = 0; i < data.data.length; i++) {
+          const resp = await getUserById(data.data[i].userId)
+          data.data[i].userInfo = resp.data
+        }
       }
       setCommentList(data.data)
       setPageInfo({

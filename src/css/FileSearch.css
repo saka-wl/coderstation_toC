@@ -1,0 +1,8 @@
+#send_btn, #stop_btn, #video_btn {
+    height: 60px;
+    width: 140px;
+    border: 1px solid blue;
+    color: black;
+    font-size: 18px;
+    border-radius: 3px;
+}

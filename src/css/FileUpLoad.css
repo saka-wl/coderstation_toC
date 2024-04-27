@@ -1,0 +1,27 @@
+
+
+#file {
+    /* height: 30px;
+    width: 70px; */
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+#send_btn, #stop_btn, #video_btn {
+    height: 60px;
+    width: 140px;
+    border: 1px solid blue;
+    color: black;
+    font-size: 18px;
+    border-radius: 3px;
+}
+
+#process {
+    font-size: 18px;
+    margin-left: 30px;
+}
+
+input#file-upload-button {
+    /* height: 30px;
+    width: 60px; */
+}
