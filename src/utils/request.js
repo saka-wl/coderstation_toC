@@ -51,12 +51,13 @@ export async function getHandshake(name, fileId, chunks) {
  * @param {*} secret 
  * @returns 
  */
-export async function addNewFileInfo(fileName, fileId, userId, secret, filePosition) {
+export async function addNewFileInfo(fileName, fileId, userId, secret, previewImgsUrl = []) {
     return await axios({
         url: "/api/uploadfile/addNewFileInfo",
         method: "POST",
         data: {
-            fileName, fileId, userId, secret, filePosition
+            fileName, fileId, userId, secret, 
+            previewImagesUrl: JSON.stringify(previewImgsUrl)
         }
     })
 }
@@ -77,9 +78,9 @@ export async function getAllUserFiles(userId, condition) {
     })
 }
 
-export async function getFilePositionUrl(fileId, pwd) {
+export async function getFileUrl(fileId, pwd) {
     return await axios({
-        url: "/api/uploadfile/getFilePositionUrl",
+        url: "/api/uploadfile/getFileUrl",
         method: "POST",
         data: {
             fileId, pwd
@@ -152,6 +153,21 @@ export async function forgetFile(_id, fileName, fileId) {
         method: "POST",
         data: {
             _id, fileId, ext
+        }
+    })
+}
+
+export async function uploadPreviewPic(imgsBlobArr) {
+    const form = new FormData()
+    for (let i = 0; i < imgsBlobArr.length; i++) {
+        form.append('imgs', new File([imgsBlobArr[i].blob], imgsBlobArr[i].hash + '.png', { type: 'image/png' }))
+    }
+    return await axios({
+        url: '/api/uploadfile/previewImgs',
+        method: 'POST',
+        data: form,
+        headers: {
+            'Content-Type': 'multipart/form-data'
         }
     })
 }

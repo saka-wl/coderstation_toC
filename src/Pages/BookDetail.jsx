@@ -33,7 +33,7 @@ function BookDetail(props) {
     } else {
       dispatch(
         updateUserInfoAsync({
-          userId: id,
+          userId: userInfo._id,
           newInfo: {
             points: userInfo.points - bookInfo.requirePoints
           }

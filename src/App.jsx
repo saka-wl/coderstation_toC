@@ -27,6 +27,7 @@ function App() {
         message.warning(result.msg)
       } else {
         const {data} = await getUserById(result.data._id)
+        // console.log(data, 'data')
         dispatch(initUserInfo(data))
         dispatch(changeLoginStatus(true))
       }

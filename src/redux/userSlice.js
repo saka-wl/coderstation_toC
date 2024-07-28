@@ -4,6 +4,7 @@ import { editUser } from '../api/user'
 export const updateUserInfoAsync = createAsyncThunk(
   "user/updateUserInfoAsync",
   async (payload, thunkApi) => {
+    // console.log(payload)
     await editUser(payload.userId, payload.newInfo)
     thunkApi.dispatch(updateUserInfo(payload.newInfo))
   }

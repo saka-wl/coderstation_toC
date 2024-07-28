@@ -111,7 +111,8 @@ function LoginForm(props) {
     if (result.data) {
       message.success('用户注册成功，默认密码为 123456')
       // 将用户的信息存储到用户仓库
-      dispatch(initUserInfo(result.data))
+      dispatch(initUserInfo(result.data.result))
+      localStorage.setItem("userToken", result.data.token)
       dispatch(changeLoginStatus(true))
       clearInfo()
     } else {

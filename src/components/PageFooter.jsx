@@ -3,42 +3,34 @@ import React from 'react';
 function PageFooter(props) {
   return (
     <div>
-    {/* <p className="links">
+    <p className="links">
         <span className="linkItem">友情链接：</span>
         <a
-            href="https://duyi.ke.qq.com/"
+            href="https://www.yuque.com/yuqueyonghuyvwkzn/dgzfcm/fh7eqtsuec2ra16u"
             target="_blank"
             rel="noreferrer"
             className="linkItem"
         >
-            渡一教育-腾讯课堂
+            我的语雀
         </a>
         <a
-            href="http://www.yuanjin.tech/"
+            href="http://121.40.178.172:3001/assets"
             target="_blank"
             rel="noreferrer"
             className="linkItem"
         >
-            袁进的博客
+            我的博客
         </a>
         <a
-            href="http://yanhongzhi.com/"
+            href="https://github.com/saka-wl"
             target="_blank"
             rel="noreferrer"
             className="linkItem"
         >
-            Mr.Yan
+            Github
         </a>
-        <a
-            href="https://blog.csdn.net/jackfrued"
-            target="_blank"
-            rel="noreferrer"
-            className="linkItem"
-        >
-            骆昊的技术专栏
-        </a>
-    </p> */}
-    <p>© 2022 - Coder Station</p>
+    </p>
+    <p>© 2024 - Coder Station</p>
     <p>Powered by Create React App</p>
 </div>
   );

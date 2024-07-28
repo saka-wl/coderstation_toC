@@ -59,22 +59,36 @@ function MyFileList() {
             width: "30%",
         },
         {
-            title: 'FileId',
-            dataIndex: 'fileId',
-            key: 'myfilelist-fileId',
+            title: '_id',
+            dataIndex: '_id',
+            key: 'myfilelist-_Id',
             width: "40%",
-            render: (fileId) => {
+            render: (_id) => {
                 return (
-                    <div className="fileId" key={fileId}>
+                    <div className="fileId" key={_id}>
                         <div className="fileId-text">
-                            <span>{fileId}</span>
+                            <span id="fileId_text">{_id}</span>
                         </div>
                         <div className="fileId-btn">
                             <Button
                                 type="text"
                                 onClick={async () => {
-                                    await navigator.clipboard.writeText(fileId)
-                                    message.success('复制成功')
+                                    // 创建text area
+                                    const textArea = document.createElement('textarea')
+                                    textArea.style.height = 0
+                                    textArea.value = _id
+                                    // 使text area不在viewport，同时设置不可见
+                                    document.body.appendChild(textArea)
+                                    textArea.focus()
+                                    textArea.select()
+                                    return new Promise((res, rej) => {
+                                        // 执行复制命令并移除文本框
+                                        document.execCommand('copy') ? res() : rej()
+                                        textArea.remove()
+                                    })
+
+                                    // await navigator.clipboard.writeText(_id)
+                                    // message.success('复制成功')
                                 }}
                                 className="copyBtn"
                                 size="small"

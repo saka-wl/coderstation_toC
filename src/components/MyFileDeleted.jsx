@@ -30,8 +30,8 @@ function MyFileDeleted() {
             width: "40%"
         },
         {
-            title: 'FileId',
-            dataIndex: 'fileId',
+            title: '_id',
+            dataIndex: '_id',
             key: 'myfiledelete-fileId',
             width: "30%"
         },

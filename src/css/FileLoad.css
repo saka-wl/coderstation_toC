@@ -18,6 +18,7 @@
 .file-content {
     /* margin-top: 15px; */
     min-height: 700px;
+    width: 100%;
 }
 
 .fileload {

@@ -6,3 +6,32 @@
     font-size: 18px;
     border-radius: 3px;
 }
+
+.pic-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    height: 500px;
+    overflow-y: scroll;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+.pic-container img {
+    height: 80px;
+    transition: all .8s;
+    cursor: pointer;
+}
+
+.pic-container img:hover {
+    transform: scale(1.6);
+}
+
+.pic-container .inside-item {
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.pic-container p {
+    margin-left: 10px;
+}

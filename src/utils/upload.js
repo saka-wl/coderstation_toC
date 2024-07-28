@@ -1,3 +1,4 @@
+import { uploadPreviewPic } from "./request";
 import sparkmd5 from "./sparkmd5";
 
 /**
@@ -26,6 +27,7 @@ export function createChunk(file, index, chunkSize) {
     return new Promise((resolve) => {
         const start = index * chunkSize;
         const end = start + chunkSize;
+        // 使用sparkmd5的ArrayBuffer构造方法，读取二进制文件
         const spark = new sparkmd5.ArrayBuffer();
         const fileReader = new FileReader();
         /**
@@ -126,4 +128,91 @@ export function cutFile(file) {
     });
 }
 
+/**
+ * 获取图片的md5
+ */
+export function getImgsMD5(imgsBlobArr) {
+    return new Promise((resolve) => {
+        let finishedIndex = 0
+        let res = []
+        const spark = new sparkmd5.ArrayBuffer();
+        for (let i = 0; i < imgsBlobArr.length; i++) {
+            const fileReader = new FileReader();
+            fileReader.onload = (e) => {
+                spark.append(e.target.result);
+                res[i] = spark.end()
+                finishedIndex++
+                if (finishedIndex === imgsBlobArr.length) {
+                    resolve(res)
+                }
+            };
+            fileReader.readAsArrayBuffer(imgsBlobArr[i]);
+        }
+    })
+}
+
+/**
+ * 视频帧处理
+ * @param {*} file 
+ * @param {*} duration 
+ * @returns 
+ */
+export function getVideoFrame(file, duration) {
+    duration = ~~duration
+    return new Promise((resolve, rej) => {
+        if (typeof duration !== 'number') {
+            resolve("输入的时间应是一个数字！")
+            return
+        };
+        duration = Math.ceil(duration)
+        if (duration < 1) {
+            resolve("时间间隔太小啦！应该在2s以上！")
+            return;
+        }
+        let task = (time = 1) => {
+            return new Promise((r, j) => {
+                if (!file) return null;
+                vdo.currentTime = time
+                vdo.oncanplay = () => {
+                    const cvs = document.createElement('canvas')
+                    cvs.width = vdo.videoWidth
+                    cvs.height = vdo.videoHeight
+                    const ctx = cvs.getContext('2d')
+                    ctx.drawImage(vdo, 0, 0, cvs.width, cvs.height)
+                    cvs.toBlob((blob) => {
+                        const url = URL.createObjectURL(blob)
+                        r({
+                            url,
+                            blob
+                        })
+                    })
+                }
+            })
+        }
+        let res = []
+        const vdo = document.createElement('video')
+        vdo.muted = true
+        vdo.autoplay = true
+        vdo.src = URL.createObjectURL(file)
+        vdo.oncanplay = async () => {
+            const vdoEndTime = Math.floor(vdo.duration)
+            for (let time = 1, i = 0; time < vdoEndTime; time = time + duration, i++) {
+                res[i] = await task(time, i)
+            }
+            const worker = new Worker(
+                new URL(
+                    './worker-img.js',
+                    import.meta.url
+                )
+            );
+            worker.postMessage(res.map(it => it.blob))
+            worker.onmessage = (e) => {
+                uploadPreviewPic(res.map((it, index) => ({ hash: e.data[index], blob: it.blob })))
+                resolve(res.map((it, index) => ({ url: it.url, hash: e.data[index] })))
+                worker.terminate();
+            }
+
+        }
+    })
+}
 
